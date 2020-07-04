@@ -1,37 +1,41 @@
+function preload() {
+  imagemCenario = loadImage('imagens/cenario/floresta.png');
+  imagemGameOver = loadImage('imagens/assets/game-over.png');
+  imagemPersonagem = loadImage('imagens/personagem/correndo.png');
+  imagemInimigo = loadImage('imagens/inimigos/gotinha.png');
+  imagemInimigoGrande = loadImage('imagens/inimigos/troll.png');
+  imagemInimigoVoador = loadImage('imagens/inimigos/gotinha-voadora.png');
+  imagemTelaInicial = loadImage('imagens/cenario/telaInicial.png');
+    imagemVida = loadImage('imagens/assets/heart.png');
+  fonteTelaInicial = loadFont('imagens/assets/fonteTelaInicial.otf');
+  fita = loadJSON("fita/fita.json");
+    
+
+  musicGame = loadSound('sons/trilha_jogo.mp3');
+  musicJump = loadSound('sons/somPulo.mp3');
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  cenario = new Cenario(imagemCenario, 3);
-  pontuacao = new Pontuacao();
-
-  personagem = new Personagem(matrizPersonagem, imagemPersonagem, 0, 30, 110, 135, 220, 270);
-
-  const inimigo = new Inimigo(matrizInimigo, imagemInimigo, width - 52, 30, 52, 52, 104, 104, 10, 100);
-
-  const inimigoVoador = new Inimigo(matrizInimigoVoador, imagemInimigoVoador, width - 52, 200, 100, 75, 200, 150, 10, 100);
-
-  const inimigoGrande = new Inimigo(matrizInimigoGrande, imagemInimigoGrande, width, 0, 200, 200, 400, 400, 15, 100)
-
-  inimigos.push(inimigo);
-  inimigos.push(inimigoVoador);
-  inimigos.push(inimigoGrande);
-
-  jogo = new Jogo();
-  telaInicial = new TelaInicial();
-
+  telaInicial = new TelaInicial()
+  jogo = new Jogo()
   cenas = {
-    jogo,
-    telaInicial
-  };
+    telaInicial,
+    jogo
+  }
+  jogo.setup()
+  botaoGerenciador = new BotaoGerenciador('Iniciar', width / 2, height / 2)
 
-  botaoGerenciador = new BotaoGerenciador('Iniciar',width / 2, height / 2);
-  frameRate(40);
+  frameRate(40)
   musicGame.loop();
 }
 
 function keyPressed() {
-  jogo.keyPressed(key);
+  jogo.keyPressed(key)
 }
 
 function draw() {
-  cenas[cenaAtual].draw();
+  // if(cenaAtual === 'jogo') {
+  //   jogo.draw()
+  // }
+  cenas[cenaAtual].draw()
 }
